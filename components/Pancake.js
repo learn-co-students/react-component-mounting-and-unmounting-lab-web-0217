@@ -1,10 +1,17 @@
 const React = require('react');
 
 class Pancake extends React.Component {
-  
+
   // TODO: create a componentDidMount() which will start the interval to count how long the pancake has been cooking
-  
+  componentDidMount() {
+    this.startInterval()
+  }
+
   // TODO: create a componentWillUnmount() which will clear the interval
+  componentWillUnmount() {
+    this.cleanUpInterval()
+  }
+
 
   updateCounter() {
     this.setState({
@@ -27,7 +34,10 @@ class Pancake extends React.Component {
   }
 
   getPancakeStatus() {
-    const { timeCooked, flippedAt } = this.state;
+    const {
+      timeCooked,
+      flippedAt
+    } = this.state;
 
     // first side
     if (!flippedAt) {
@@ -43,8 +53,13 @@ class Pancake extends React.Component {
   }
 
   takeItOff() {
-    const { id } = this.props;
-    const { timeCooked, flippedAt } = this.state;
+    const {
+      id
+    } = this.props;
+    const {
+      timeCooked,
+      flippedAt
+    } = this.state;
     let status = this.getPancakeStatus();
     this.props.takeItOff(id, status);
   }
@@ -61,18 +76,34 @@ class Pancake extends React.Component {
   }
 
   render() {
-    const { timeCooked, flippedAt } = this.state;
+    const {
+      timeCooked,
+      flippedAt
+    } = this.state;
     const firstSide = Boolean(this.state.flippedAt === undefined);
     const status = this.getPancakeStatus();
 
-    return (
-      <div className={`Pancake --${status}`}>
-        <div className="Pancake__content">
-          <p>I am a pancake.</p>
-          Time cooked on {`${firstSide ? 'first' : 'second'}`} side: {`${firstSide ? timeCooked : timeCooked - flippedAt}`}
-          <div>{ firstSide ? <button onClick={this.flip}>Flip me!</button> : <button onClick={this.takeItOff}>Take me off!</button>}</div>
-        </div>
-      </div>
+    return ( <
+      div className = {
+        `Pancake --${status}`
+      } >
+      <
+      div className = "Pancake__content" >
+      <
+      p > I am a pancake. < /p>
+      Time cooked on {
+        `${firstSide ? 'first' : 'second'}`
+      }
+      side: {
+        `${firstSide ? timeCooked : timeCooked - flippedAt}`
+      } <
+      div > {
+        firstSide ? < button onClick = {
+          this.flip
+        } > Flip me! < /button> : <button onClick={this.takeItOff}>Take me off!</button >
+      } < /div> < /
+      div > <
+      /div>
     )
   }
 }
