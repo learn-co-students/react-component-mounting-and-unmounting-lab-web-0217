@@ -1,9 +1,12 @@
 import React from 'react';
 import Pancake from './Pancake';
 
-export default class Game extends React.Component {
+class Game extends React.Component {
 
   // TODO: create a componentWillMount() which will set the current time
+  componentWillMount() {
+    this.setCurrentTime()
+  }
 
   setCurrentTime() {
     this.setState({ time: new Date(Date.now())});
@@ -38,6 +41,7 @@ export default class Game extends React.Component {
     this.takeItOff = this.takeItOff.bind(this);
   }
 
+
   render() {
     const { pancakes, burnt, cooked, raw, time } = this.state;
     const pans = pancakes.map((pancake, index) => <Pancake key={index} id={pancake} takeItOff={this.takeItOff} />);
@@ -55,3 +59,5 @@ export default class Game extends React.Component {
     )
   }
 }
+
+module.exports = Game
